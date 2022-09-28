@@ -5,6 +5,27 @@ import SignIn from "../pages/SignIn";
 import LogIn from "../pages/LogIn";
 import { useEffect, useState } from "react";
 
+type Offer = {
+  id : number,
+  name : string,
+  price : string,
+  minutes : string,
+  mb: string,
+  sms : string,
+  duration: string
+
+}
+
+type User = {
+  id : number,
+  name : string,
+  email : string,
+  number : string,
+  password : string,
+  balance : string,
+
+}
+
 const Routers = () => {
   const [currentUser , setCurrentUser] = useState(null)
   const [currentUserOffers , setCurrentUserOffers ] = useState(null)
@@ -62,8 +83,8 @@ const Routers = () => {
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/signIn" element={<SignIn />} />
-      <Route path="/logIn" element={<LogIn />} />
+      <Route path="/signIn" element={<SignIn signIn={signIn} />} />
+      <Route path="/logIn" element={<LogIn signIn={signIn} />} />
     </Routes>
   );
 };
