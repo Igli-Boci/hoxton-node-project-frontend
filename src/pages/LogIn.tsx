@@ -1,8 +1,4 @@
-type props = {
-  signIn : Function
-}
-
-const LogIn = ({signIn} : props) => {
+const LogIn = () => {
   return (
     <div>
       <h1>Log In Page</h1>
@@ -10,7 +6,7 @@ const LogIn = ({signIn} : props) => {
         action=""
         onSubmit={(e) => {
           e.preventDefault();
-          fetch("http://localhost:3001/sign-in", {
+          fetch("http://localhost:3010/sign-in", {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({
@@ -18,22 +14,25 @@ const LogIn = ({signIn} : props) => {
               password: e.target.password.value,
             }),
           })
-          .then(resp => resp.json())
-          .then(data => {
-            if (data.error) {
-              alert(data.error)
-            } else{
-              signIn(data)
-            }
-          })
+            .then((resp) => resp.json())
+            .then((data) => {
+              if (data.error) {
+                alert(data.error);
+              } else {
+                // signIn(data);
+              }
+            });
         }}
       >
         <label htmlFor="">
           email
-          <input type="email" name="email" /></label>
-          <label htmlFor="">password<input type="password" name="password" /></label>
-          
-        
+          <input type="email" name="email" />
+        </label>
+        <label htmlFor="">
+          password
+          <input type="password" name="password" />
+        </label>
+
         <button>submit</button>
       </form>
     </div>
