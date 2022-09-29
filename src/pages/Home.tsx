@@ -1,7 +1,13 @@
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+import Offers from "./Offers";
+
 const Home = () => {
   return (
     <div>
-      <h1>Home Page</h1>
+      <Header />
+      <Offers />
+      <Footer />
     </div>
   );
 };
