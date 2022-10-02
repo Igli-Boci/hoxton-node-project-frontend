@@ -1,0 +1,9 @@
+.gradient-custom-2 {
+  background: var(--body-bg);
+}
+.back--ground {
+  background: var(--card-bg);
+}
+.text-color{
+    color: var(--primary-color);
+}

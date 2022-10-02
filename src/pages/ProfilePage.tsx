@@ -1,0 +1,118 @@
+import "../styles/offers.css";
+import "../styles/profilePage.css";
+import "../../node_modules/mdb-ui-kit/css/mdb.min.css";
+import { useEffect, useState } from "react";
+
+export function ProfilePage() {
+  const [offers, setOffers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3010/offers")
+      .then((resp) => resp.json())
+      .then((resp) => setOffers(resp));
+  }, [offers]);
+
+  function minutes() {
+    let minutes = 0;
+    for (const iterator of offers) {
+      minutes = +iterator.minutes;
+    }
+    return minutes;
+  }
+  function mb() {
+    let mb = 0;
+    for (const iterator of offers) {
+      mb = +iterator.mb;
+    }
+    return mb;
+  }
+  function SMS() {
+    let SMS = 0;
+    for (const iterator of offers) {
+      SMS = +iterator.SMS;
+    }
+    return SMS;
+  }
+
+  return (
+    <section className="h-100 gradient-custom-2">
+      <div className="container py-5 h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col col-lg-9 col-xl-7">
+            <div className="card">
+              <div
+                className="rounded-top text-white d-flex flex-row back--ground"
+                style={{ height: "200px" }}
+              >
+                <div
+                  className="ms-4 mt-5 d-flex flex-column"
+                  style={{ width: "150px" }}
+                >
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                    alt="Generic placeholder image"
+                    className="img-fluid img-thumbnail mt-4 mb-2"
+                    style={{ width: "150px", zIndex: 1 }}
+                  />
+                  <button
+                    type="button"
+                    id="button-outline"
+                    className="btn btn-outline-dark button-col"
+                    data-mdb-ripple-color="dark"
+                    style={{ zIndex: 1 }}
+                  >
+                    Edit profile
+                  </button>
+                </div>
+                <div className="ms-3" style={{ marginTop: "130px" }}>
+                  <h5 className="text-color">Andy Horwitz</h5>
+                  <p className="text-color">New York</p>
+                </div>
+              </div>
+              <div
+                className="p-4 text-black"
+                style={{ backgroundColor: "#f8f9fa" }}
+              >
+                <div className="d-flex justify-content-end text-center py-1">
+                  <div>
+                    <p className="mb-1 h5">{mb()}</p>
+                    <p className="small text-muted mb-0">Mb</p>
+                  </div>
+                  <div className="px-3">
+                    <p className="mb-1 h5">{minutes()}</p>
+                    <p className="small text-muted mb-0">Minutes</p>
+                  </div>
+                  <div>
+                    <p className="mb-1 h5">{SMS()}</p>
+                    <p className="small text-muted mb-0">SMS</p>
+                  </div>
+                </div>
+              </div>
+              <div className="card-body p-4 text-black">
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                  <p className="lead fw-normal mb-0">Offers in use</p>
+                  <p className="mb-0">
+                    <a href="#!" className="text-muted">
+                      Show all
+                    </a>
+                  </p>
+                </div>
+                <div className="offers_item-wrapper">
+                  {offers.map((offer, index) => (
+                    <div className="offers_item" key={index}>
+                      <span className="offers__icon">
+                        <i className={offer.icon}></i>
+                      </span>
+                      <h3 className="offers__title">{offer.name}</h3>
+                      <p className="description">{offer.mb}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

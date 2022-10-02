@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import SignUp from "../pages/SignUp";
 import LogIn from "../pages/LogIn";
 import Offers from "../pages/Offers";
+import { ProfilePage } from "../pages/ProfilePage";
 
 const Routers = () => {
   // const [currentUser, setCurrentUser] = useState(null);
@@ -54,6 +55,7 @@ const Routers = () => {
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/logIn" element={<LogIn />} />
       <Route path="/all-offers" element={<Offers />} />
