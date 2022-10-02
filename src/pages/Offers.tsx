@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import "../styles/offers.css";
 
 const Offers = () => {
   const [offers, setOffers] = useState([]);
-
+  const navigate = useNavigate()
   useEffect(() => {
     fetch("http://localhost:3010/all-offers")
       .then((resp) => resp.json())
@@ -20,8 +21,11 @@ const Offers = () => {
         </div>
 
         <div className="offers__item-wrapper">
+
           {offers.map((offer, index) => (
-            <div className="offers__item" key={index}>
+            <div className="offers__item" key={index} onClick={()=>{
+              navigate(`/offer/${offer.name}`)
+            }}>
               <span className="offers__icon">
                 <i className={offer.icon}></i>
               </span>

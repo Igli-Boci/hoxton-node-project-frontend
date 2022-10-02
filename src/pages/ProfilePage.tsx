@@ -7,9 +7,13 @@ export function ProfilePage() {
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3010/offers")
+    fetch("http://localhost:3010/offers", {
+      method : "GET",
+      headers : {Authorization : localStorage.token}
+    })
       .then((resp) => resp.json())
-      .then((resp) => setOffers(resp));
+      .then((resp) => {setOffers(resp)
+         console.log(resp)});
   }, [offers]);
 
   function minutes() {
@@ -90,7 +94,7 @@ export function ProfilePage() {
               </div>
               <div className="card-body p-4 text-black">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <p className="lead fw-normal mb-0">Offers in use</p>
+                  <p className="lead fw-normal mb-0">{offers ? "Offerts in use:":"Your have not subscribet to any of our offers" }</p>
                   <p className="mb-0">
                     <a href="#!" className="text-muted">
                       Show all

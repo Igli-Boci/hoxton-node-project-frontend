@@ -61,7 +61,7 @@ const LogIn = () => {
                           placeholder="Phone number or email address"
                         />
                         <label className="form-label" htmlFor="form2Example11">
-                          Username
+                          Email
                         </label>
                       </div>
 
