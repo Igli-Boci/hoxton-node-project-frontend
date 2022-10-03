@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "../styles/offer.css";
 
 const Offers = () => {
   const params = useParams();
@@ -15,13 +16,21 @@ const Offers = () => {
     <section id="offers">
       <div className="container">
         <div className="offers__top-content">
-          <h6 className="subtitle">{offer.name}</h6>
-          <h2>Get what your deserve from</h2>
-          <h2 className="highlight">our best services</h2>
+          <h1 className="subtitle">{offer.name}</h1>
         </div>
 
         <div className="offers__item-wrapper">
-          <div className="offers__item"></div>
+          <div className="offers__item">
+            <span className="offers__icon">
+              <i className={offer.icon}></i>
+            </span>
+            <h3 className="offers__title">{offer.name}</h3>
+            <p className="description">{offer.mb}</p>
+            <p className="description">{offer.minuts} Min</p>
+            <p className="description">{offer.sms} Sms</p>
+            <p className="description price">{offer.price} €</p>
+          </div>
+          <button className="offer__button">Add to your plan</button>
         </div>
       </div>
     </section>
