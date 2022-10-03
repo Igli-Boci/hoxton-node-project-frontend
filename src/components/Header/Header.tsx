@@ -1,5 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./header.css";
+import { User } from "../../pages/ProfilePage";
+import e from "cors";
 
 const nav__links = [
   {
@@ -14,21 +16,34 @@ const nav__links = [
     display: "Profile",
     path: "/profile",
   },
-  {
-    display: "LogIn",
-    path: "/logIn",
-  },
-  {
-    display: "Sign Up",
-    path: "/signUp",
-  },
 ];
 
-const Header = () => {
+const Header = ({ setCurrentUser }: any) => {
+  const [user, setUser] = useState<User | null>(null);
+
+  function signOut() {
+    setCurrentUser(null);
+    localStorage.removeItem("token");
+  }
   useEffect(() => {
     window.addEventListener;
   }, []);
-
+  useEffect(() => {
+    fetch("http://localhost:3010/user", {
+      method: "GET",
+      headers: { Authorization: localStorage.token },
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        if (resp.error) {
+          alert("error");
+        } else {
+          setUser(resp);
+          console.log(resp);
+        }
+      });
+  }, []);
+  console.log(user);
   return (
     <header className="header">
       <div className="container">
@@ -46,7 +61,8 @@ const Header = () => {
                     {item.display}
                   </a>
                 </li>
-              ))}
+              ))}{" "}
+              {user ? "user is logedIn" : "user is logout"}
             </ul>
           </div>
         </div>

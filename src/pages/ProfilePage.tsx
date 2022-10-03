@@ -3,7 +3,7 @@ import "../styles/profilePage.css";
 import "../../node_modules/mdb-ui-kit/css/mdb.min.css";
 import { useEffect, useState } from "react";
 
-type Offer = {
+export type Offerta = {
   id      : number
   name    : string 
   price   : string
@@ -13,16 +13,17 @@ type Offer = {
   duration: string
   icon    : string 
 }
-type User = {
+export type User = {
   id      : number    
   name    : string
   email   : string 
   number  : string  
   password: string
   balance : string  
-  offers  : Offer[]
+  offers  : Offerta[]
 }
-export function ProfilePage({ currentUser }: any) {
+
+export function ProfilePage({ currentUser, signOut }: any) {
   const [offers, setOffers] = useState([]);
   const [user, setUser] = useState<User | null>(null);
 
@@ -134,7 +135,7 @@ export function ProfilePage({ currentUser }: any) {
                 </div>
                 <div className="offers_item-wrapper">
                   {offers.map((offer, index) => (
-                    <div className="offers_item" key={offer.id}>
+                    <div className="offers_item" key={index}>
                       <span className="offers__icon">
                         <i className={offer.icon}></i>
                       </span>

@@ -11,6 +11,8 @@ const Offers = () => {
       .then((resp) => setOffers(resp));
   }, [offers]);
 
+  
+
   return (
     <>
       <section id="offers">
