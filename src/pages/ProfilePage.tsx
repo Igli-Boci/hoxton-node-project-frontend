@@ -3,8 +3,28 @@ import "../styles/profilePage.css";
 import "../../node_modules/mdb-ui-kit/css/mdb.min.css";
 import { useEffect, useState } from "react";
 
+type Offer = {
+  id      : number
+  name    : string 
+  price   : string
+  minuts  : string
+  mb      : string
+  sms     : string
+  duration: string
+  icon    : string 
+}
+type User = {
+  id      : number    
+  name    : string
+  email   : string 
+  number  : string  
+  password: string
+  balance : string  
+  offers  : Offer[]
+}
 export function ProfilePage({ currentUser }: any) {
   const [offers, setOffers] = useState([]);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     fetch("http://localhost:3010/offers", {
@@ -14,6 +34,18 @@ export function ProfilePage({ currentUser }: any) {
       .then((resp) => resp.json())
       .then((resp) => {
         setOffers(resp);
+        console.log(resp);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:3010/user", {
+      method: "GET",
+      headers: { Authorization: localStorage.token },
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setUser(resp);
         console.log(resp);
       });
   }, []);
@@ -64,7 +96,7 @@ export function ProfilePage({ currentUser }: any) {
                   </button>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <h5 className="text-color">{currentUser.name}</h5>
+                  <h5 className="text-color">{currentUser?.name}</h5>
                   <p className="text-color">New York</p>
                 </div>
               </div>
@@ -102,7 +134,7 @@ export function ProfilePage({ currentUser }: any) {
                 </div>
                 <div className="offers_item-wrapper">
                   {offers.map((offer, index) => (
-                    <div className="offers_item" key={index}>
+                    <div className="offers_item" key={offer.id}>
                       <span className="offers__icon">
                         <i className={offer.icon}></i>
                       </span>
