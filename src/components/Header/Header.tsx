@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./header.css";
 import { User } from "../../pages/ProfilePage";
-import e from "cors";
 
 const nav__links = [
   {
@@ -22,7 +21,7 @@ const Header = ({ setCurrentUser }: any) => {
   const [user, setUser] = useState<User | null>(null);
 
   function signOut() {
-    setCurrentUser(null);
+    setUser(null);
     localStorage.removeItem("token");
   }
   useEffect(() => {
@@ -61,8 +60,34 @@ const Header = ({ setCurrentUser }: any) => {
                     {item.display}
                   </a>
                 </li>
-              ))}{" "}
-              {user ? "user is logedIn" : "user is logout"}
+              ))}
+              {user ? (
+                <>
+                  <li className="menu__item">
+                    <a href="/logIn" className="menu__link">
+                      {"Log Out"}
+                    </a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li
+                    className="menu__item"
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
+                    <a href="logIn" className="menu__link">
+                      {"Log In"}
+                    </a>
+                  </li>
+                  <li className="menu__item">
+                    <a href="/signUp" className="menu__link">
+                      {"Sign Up"}
+                    </a>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
