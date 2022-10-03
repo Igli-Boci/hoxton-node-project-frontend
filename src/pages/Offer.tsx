@@ -5,8 +5,10 @@ import "../styles/offer.css";
 
 type props ={
   currentUser : User | null 
+  offers : Offerta[],
+  setOffers : Function
 }
-const Offer = ({currentUser}: props) => {
+const Offer = ({currentUser, offers, setOffers}: props) => {
   const params = useParams();
   const [offer, setOffer] = useState<Offerta | null >(null);
   const navigate = useNavigate();
@@ -19,10 +21,9 @@ const Offer = ({currentUser}: props) => {
 
 
   function buyOffer () {
-    const newoffer = structuredClone(offer)
-    
-    currentUser?.offers.push(offer)
-
+   const newOffers = structuredClone(offers)
+   newOffers.push(offer)
+   setOffers(newOffers)
   }
 
   return (

@@ -11,6 +11,7 @@ import Header from "../components/Header/Header";
 import {User} from "../pages/ProfilePage"
 const Routers = () => {
  const [currentUser, setCurrentUser] = useState<User | null>(null);
+ const [offers, setOffers] = useState([]);
  
   function signIn(data) {
     setCurrentUser(data.user);
@@ -38,19 +39,29 @@ const Routers = () => {
     }
   }, []);
 
- 
+  useEffect(() => {
+    fetch("http://localhost:3010/offers", {
+      method: "GET",
+      headers: { Authorization: localStorage.token },
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setOffers(resp);
+        console.log(resp);
+      });
+  }, []);
 
   return (
     <>
-    <Header setCurrentUser={setCurrentUser} />
+    <Header setCurrentUser={setCurrentUser} currentUser={currentUser}/>
     <Routes >
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/profile" element={<ProfilePage currentUser={currentUser} signOut={signOut}/>} />
+      <Route path="/profile" element={<ProfilePage currentUser={currentUser} signOut={signOut} offers={offers} setOffers={setOffers}/>} />
       <Route path="/signUp" element={<SignUp signIn={signIn} />} />
       <Route path="/logIn" element={<LogIn currentUser={currentUser} signIn={signIn}/>} />
       <Route path="/all-offers" element={<Offers />} />
-      <Route path="/offer/:name" element={<Offer currentUser={currentUser}/>} />
+      <Route path="/offer/:name" element={<Offer currentUser={currentUser} offers={offers} setOffers={setOffers}/>} />
     </Routes>
     </>
   );

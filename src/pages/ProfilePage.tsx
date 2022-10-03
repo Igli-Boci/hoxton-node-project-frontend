@@ -4,40 +4,31 @@ import "../../node_modules/mdb-ui-kit/css/mdb.min.css";
 import { useEffect, useState } from "react";
 
 export type Offerta = {
-  id      : number
-  name    : string 
-  price   : string
-  minuts  : string
-  mb      : string
-  sms     : string
-  duration: string
-  icon    : string 
-}
+  id: number;
+  name: string;
+  price: string;
+  minuts: string;
+  mb: string;
+  sms: string;
+  duration: string;
+  icon: string;
+};
 export type User = {
-  id      : number    
-  name    : string
-  email   : string 
-  number  : string  
-  password: string
-  balance : string  
-  offers  : Offerta[]
-}
+  id: number;
+  name: string;
+  email: string;
+  number: string;
+  password: string;
+  balance: string;
+  offers: Offerta[];
+  userId: number;
+};
 
-export function ProfilePage({ currentUser, signOut }: any) {
-  const [offers, setOffers] = useState([]);
+export function ProfilePage({ currentUser, signOut , offers, setOffers}: any) {
+  
   const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    fetch("http://localhost:3010/offers", {
-      method: "GET",
-      headers: { Authorization: localStorage.token },
-    })
-      .then((resp) => resp.json())
-      .then((resp) => {
-        setOffers(resp);
-        console.log(resp);
-      });
-  }, []);
+
 
   useEffect(() => {
     fetch("http://localhost:3010/user", {

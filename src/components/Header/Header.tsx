@@ -11,18 +11,14 @@ const nav__links = [
     display: "Offers",
     path: "/all-offers",
   },
-  {
-    display: "Profile",
-    path: "/profile",
-  },
 ];
 
-const Header = ({ setCurrentUser }: any) => {
+const Header = ({ setCurrentUser, currentUser }: any) => {
   const [user, setUser] = useState<User | null>(null);
 
   function signOut() {
-    setUser(null);
     localStorage.removeItem("token");
+    setCurrentUser(null);
   }
   useEffect(() => {
     window.addEventListener;
@@ -35,7 +31,7 @@ const Header = ({ setCurrentUser }: any) => {
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.error) {
-          alert("error");
+          console.log("error");
         } else {
           setUser(resp);
           console.log(resp);
@@ -61,23 +57,30 @@ const Header = ({ setCurrentUser }: any) => {
                   </a>
                 </li>
               ))}
-              {user ? (
+              {currentUser ? (
                 <>
+                  {" "}
                   <li className="menu__item">
-                    <a href="/logIn" className="menu__link">
+                    <a href="/profile" className="menu__link">
+                      {"Profile"}
+                    </a>
+                  </li>
+                  <li className="menu__item">
+                    <a
+                      href="/logIn"
+                      className="menu__link"
+                      onClick={() => {
+                        signOut();
+                      }}
+                    >
                       {"Log Out"}
                     </a>
                   </li>
                 </>
               ) : (
                 <>
-                  <li
-                    className="menu__item"
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
-                    <a href="logIn" className="menu__link">
+                  <li className="menu__item">
+                    <a href="/logIn" className="menu__link">
                       {"Log In"}
                     </a>
                   </li>
