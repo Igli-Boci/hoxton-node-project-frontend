@@ -1,5 +1,5 @@
 .gradient-custom-2 {
-  background: var(--newsletter-bg);
+  background: var(--card-bg);
 }
 
 @media (min-width: 768px) {

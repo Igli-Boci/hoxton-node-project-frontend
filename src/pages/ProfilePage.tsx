@@ -3,39 +3,34 @@ import "../styles/profilePage.css";
 import "../../node_modules/mdb-ui-kit/css/mdb.min.css";
 import { useEffect, useState } from "react";
 
-export function ProfilePage() {
+export function ProfilePage({ currentUser }: any) {
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3010/offers", {
-      method : "GET",
-      headers : {Authorization : localStorage.token}
+      method: "GET",
+      headers: { Authorization: localStorage.token },
     })
       .then((resp) => resp.json())
-      .then((resp) => {setOffers(resp)
-         console.log(resp)});
-  }, [offers]);
+      .then((resp) => {
+        setOffers(resp);
+        console.log(resp);
+      });
+  }, []);
 
-  function minutes() {
-    let minutes = 0;
-    for (const iterator of offers) {
-      minutes = +iterator.minutes;
-    }
-    return minutes;
+  let minutes = 0;
+  for (const iterator of offers) {
+    minutes += Number(iterator.minuts);
   }
-  function mb() {
-    let mb = 0;
-    for (const iterator of offers) {
-      mb = +iterator.mb;
-    }
-    return mb;
+
+  let mb = 0;
+  for (const iterator of offers) {
+    mb += iterator.mb;
   }
-  function SMS() {
-    let SMS = 0;
-    for (const iterator of offers) {
-      SMS = +iterator.SMS;
-    }
-    return SMS;
+
+  let SMS = 0;
+  for (const iterator of offers) {
+    SMS += Number(iterator.sms);
   }
 
   return (
@@ -69,7 +64,7 @@ export function ProfilePage() {
                   </button>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <h5 className="text-color">Andy Horwitz</h5>
+                  <h5 className="text-color">{currentUser.name}</h5>
                   <p className="text-color">New York</p>
                 </div>
               </div>
@@ -79,22 +74,26 @@ export function ProfilePage() {
               >
                 <div className="d-flex justify-content-end text-center py-1">
                   <div>
-                    <p className="mb-1 h5">{mb()}</p>
+                    <p className="mb-1 h5">{mb}</p>
                     <p className="small text-muted mb-0">Mb</p>
                   </div>
                   <div className="px-3">
-                    <p className="mb-1 h5">{minutes()}</p>
+                    <p className="mb-1 h5">{Number(minutes)}</p>
                     <p className="small text-muted mb-0">Minutes</p>
                   </div>
                   <div>
-                    <p className="mb-1 h5">{SMS()}</p>
+                    <p className="mb-1 h5">{Number(SMS)}</p>
                     <p className="small text-muted mb-0">SMS</p>
                   </div>
                 </div>
               </div>
               <div className="card-body p-4 text-black">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <p className="lead fw-normal mb-0">{offers ? "Offerts in use:":"Your have not subscribet to any of our offers" }</p>
+                  <p className="lead fw-normal mb-0">
+                    {offers
+                      ? "Offerts in use:"
+                      : "Your have not subscribet to any of our offers"}
+                  </p>
                   <p className="mb-0">
                     <a href="#!" className="text-muted">
                       Show all

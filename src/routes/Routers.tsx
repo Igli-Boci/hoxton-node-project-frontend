@@ -29,6 +29,7 @@ const Routers = () => {
         .then((resp) => resp.json())
         .then((data) => {
           if (data.error) {
+            console.log(data)
             alert(data.error);
           } else {
             signIn(data);
@@ -55,11 +56,11 @@ const Routers = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile" element={<ProfilePage currentUser={currentUser} />} />
       <Route path="/signUp" element={<SignUp signIn={signIn} />} />
-      <Route path="/logIn" element={<LogIn />} />
+      <Route path="/logIn" element={<LogIn currentUser={currentUser} signIn={signIn}/>} />
       <Route path="/all-offers" element={<Offers />} />
       <Route path="/offer/:name" element={<Offer />} />
     </Routes>

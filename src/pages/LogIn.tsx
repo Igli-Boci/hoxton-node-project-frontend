@@ -1,5 +1,6 @@
 import "../styles/login.css";
-import "../../node_modules/mdb-ui-kit/css/mdb.min.css"
+import "../../node_modules/mdb-ui-kit/css/mdb.min.css";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   firstStyle: {
@@ -10,9 +11,14 @@ const styles = {
   },
 };
 
-const LogIn = () => {
+const LogIn = ({ currentUser, signIn }: any) => {
+  const navigate = useNavigate();
   return (
-    <section className="h-100 gradient-form" id="section" style={styles.firstStyle}>
+    <section
+      className="h-100 gradient-form"
+      id="section"
+      style={styles.firstStyle}
+    >
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-xl-10">
@@ -45,7 +51,9 @@ const LogIn = () => {
                             if (data.error) {
                               alert(data.error);
                             } else {
-                              // signIn(data);
+                              signIn(data);
+
+                              navigate("/home");
                             }
                           });
                       }}
@@ -78,22 +86,18 @@ const LogIn = () => {
                       </div>
 
                       <div className="text-center pt-1 mb-5 pb-1">
-                        <button
-                          className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                          type="button"
-                        >
+                        <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">
                           Log in
                         </button>
-                        <a className="text-muted" href="#!">
-                          Forgot password?
-                        </a>
                       </div>
 
                       <div className="d-flex align-items-center justify-content-center pb-4">
                         <p className="mb-0 me-2">Don't have an account?</p>
                         <button
-                        id="button-outline"
-                          type="button"
+                          onClick={() => {
+                            navigate("/signUp");
+                          }}
+                          id="button-outline"
                           className="btn btn-outline-danger"
                         >
                           Create new
