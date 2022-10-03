@@ -1,5 +1,4 @@
 /* google fonts */
-
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 /* css variables */
@@ -42,6 +41,28 @@
   box-sizing: border-box;
 }
 
+.light-theme {
+  --body-bg: rgb(255, 255, 255);
+  --heading-color: #0c123d;
+  --btn-secondary-bg: #331bb9;
+  --btn-primary-bg: #fff;
+  --primary-color: #3115d0;
+  --counter-color: #fff;
+  --counter-section-bg: #200a9e;
+  --link-color: #0c123d;
+  --link-active: #816aff
+  --newsletter-bg: linear-gradient(
+    180deg,
+    rgba(189, 243, 255, 1) 29%,
+    rgba(193, 243, 255, 1) 50%,
+    rgba(226, 250, 255, 1) 78%
+  );
+  --small-text-color:#000;
+  --card-bg:#fff;
+  --testimonial-bg: #f7f7f7;
+  --team-card-bg: #fff;
+}
+
 body {
   background: var(--body-bg);
   font-family: var(--font-name);
@@ -79,4 +100,22 @@ section {
   color: var(--primary-color);
   font-weight: 400;
   margin-bottom: 20px;
+}
+
+.light-theme .counter {
+  background: var(--counter-section-bg);
+}
+
+.light-theme .secondary__btn {
+  border: 1px solid var(--primary-color);
+  color: #090238;
+  font-weight: 600;
+}
+
+.light-theme a {
+  font-weight: 500;
+}
+
+.light-theme .team__img {
+  background: #ddd;
 }

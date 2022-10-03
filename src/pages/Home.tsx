@@ -1,13 +1,17 @@
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
+import Counter from "./Counter";
+import Hero from "./Hero";
+import Newsletter from "./Newsletter";
 import Offers from "./Offers";
+import Testimonial from "./Testimonial";
 
 const Home = () => {
   return (
     <div>
-      <Header />
+      <Hero />
+      <Counter />
       <Offers />
-      <Footer />
+      <Testimonial />
+      <Newsletter />
     </div>
   );
 };
