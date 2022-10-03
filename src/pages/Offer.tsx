@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {User, Offerta} from "./ProfilePage"
+import "../styles/offer.css";
 
 type props ={
   currentUser : User | null 
